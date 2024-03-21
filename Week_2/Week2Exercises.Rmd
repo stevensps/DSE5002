@@ -1,7 +1,7 @@
 ---
 title: "Week 2 Exercises"
-author: "Your Name Here"
-date: "May 14, 2022"
+author: "Steven Simonsen"
+date: "March 17, 2024"
 output: pdf_document
 ---
 
@@ -16,6 +16,9 @@ library(forcats)
 Read the sales_pipe.txt file into an R data frame as sales. 
 
 ```{r}
+library(stringr)
+library(lubridate)
+library(forcats)
 # Your code here
 sales <- read.delim("Data/sales_pipe.txt"
                      ,stringsAsFactors=FALSE
@@ -30,7 +33,8 @@ You can extract a vector of columns names from a data frame using the colnames()
 **Note: You will need to assign the first element of colnames to a single character.**
 
 ```{r}
-# Your code here
+colnames(sales)[1] <- c("Row.ID")
+sales[1:10 ,]
 ```
 
 # Exercise 3
@@ -41,8 +45,21 @@ How many weeks?
 **Note: Use lubridate**
 
 ```{r}
-# Your code here
+sales$Order.Date <- as.Date(sales$Order.Date,format="%M/%d/%Y")
+sales$Ship.Date <- as.Date(sales$Ship.Date,format="%B %d %Y")
 
+max_orderdate <- max(sales$Order.Date)
+min_orderdate <- min(sales$Order.Date)
+
+years_betweenorders <- time_length(difftime(max_orderdate, min_orderdate), "years")
+
+days_betweenorders <- time_length(difftime(max_orderdate, min_orderdate), "days")
+
+weeks_betweenorders <- time_length(difftime(max_orderdate, min_orderdate), "weeks")
+
+print(years_betweenorders)
+print(days_betweenorders)
+print(weeks_betweenorders)
 ```
 
 
@@ -50,8 +67,11 @@ How many weeks?
 What is the average number of days it takes to ship an order?
 
 ```{r}
-# Your code here
+ship_order_diff <- sales$Ship.Date - sales$Order.Date
 
+mean_shipdays <- time_length(mean(ship_order_diff),"days")
+
+print(mean_shipdays)
 ```
 
 
@@ -60,8 +80,19 @@ How many customers have the first name Bill?
 You will need to split the customer name into first and last name segments and then use a regular expression to match the first name bill. Use the length() function to determine the number of customers with the first name Bill in the sales data. 
 
 ```{r}
-# Your code here
+#It was hard for me to incorporate the length() function into this
+#This isn't the way I would normally write the code, but to answer the question
+#I wrote it this way
 
+#Split customer name into two columns
+split_custname <- str_split_fixed(sales$Customer.Name," ",n=2)
+
+#pull out the length of customer first names
+firstname_length <- str_length(split_custname[,1])
+
+#If the first name is equal to 4, then count the total number matched to the 
+#Pattern Bill. Wrap this entire piece of code in a sum function.
+sum(ifelse(firstname_length == 4, str_count(split_custname[,1],"Bill"),0))
 ```
 
 # Exercise 6
@@ -69,15 +100,18 @@ How many mentions of the word 'table' are there in the Product.Name column?
 **Note you can do this in one line of code**
 
 ```{r}
-# Your code here
-
+sum(str_count(sales$Product.Name,"table"))
 ```
 
 # Exercise 7
 Create a table of counts for each state in the sales data. The counts table should be ordered alphabetically from A to Z. 
 
 ```{r}
-# Your code here
+sales$State <- factor(sales$State)
+is.factor(sales$State)
+levels(sales$State)
+
+table(sales$State)
 
 ```
 
@@ -85,7 +119,9 @@ Create a table of counts for each state in the sales data. The counts table shou
 Create an alphabetically ordered barplot for each sales Category in the State of Texas. 
 
 ```{r}
-# Your code here
+sales_texas <- subset(sales, State=="Texas")
+
+barplot(table(sales_texas$Category))
 
 ```
 
@@ -94,8 +130,7 @@ Find the average profit by region.
 **Note: You will need to use the aggregate() function to do this. To understand how the function works type ?aggregate in the console.**
 
 ```{r}
-# Your code here
-
+aggregate(sales$Profit, list(sales$Region), FUN = mean)
 ```
 
 # Exercise 10
@@ -103,7 +138,8 @@ Find the average profit by order year.
 **Note: You will need to use the aggregate() function to do this. To understand how the function works type ?aggregate in the console.**
 
 ```{r}
-# Your code here
+orderyear <- format.Date(sales$Order.Date, "%Y")
 
+aggregate(sales$Profit, list(orderyear), FUN = mean)
 ```
 
