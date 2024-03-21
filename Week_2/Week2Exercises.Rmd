@@ -34,7 +34,9 @@ You can extract a vector of columns names from a data frame using the colnames()
 
 ```{r}
 colnames(sales)[1] <- c("Row.ID")
-sales[1:10 ,]
+#Showing slice so my document doesn't span too many pages. See first
+#column name change
+sales[1:10 , 1:6]
 ```
 
 # Exercise 3
@@ -48,18 +50,18 @@ How many weeks?
 sales$Order.Date <- as.Date(sales$Order.Date,format="%M/%d/%Y")
 sales$Ship.Date <- as.Date(sales$Ship.Date,format="%B %d %Y")
 
-max_orderdate <- max(sales$Order.Date)
-min_orderdate <- min(sales$Order.Date)
+max_order_date <- max(sales$Order.Date)
+min_order_date <- min(sales$Order.Date)
 
-years_betweenorders <- time_length(difftime(max_orderdate, min_orderdate), "years")
+years_between_orders <- time_length(difftime(max_order_date, min_order_date), "years")
 
-days_betweenorders <- time_length(difftime(max_orderdate, min_orderdate), "days")
+days_between_orders <- time_length(difftime(max_order_date, min_order_date), "days")
 
-weeks_betweenorders <- time_length(difftime(max_orderdate, min_orderdate), "weeks")
+weeks_between_orders <- time_length(difftime(max_order_date, min_order_date), "weeks")
 
-print(years_betweenorders)
-print(days_betweenorders)
-print(weeks_betweenorders)
+print(years_between_orders)
+print(days_between_orders)
+print(weeks_between_orders)
 ```
 
 
@@ -69,9 +71,9 @@ What is the average number of days it takes to ship an order?
 ```{r}
 ship_order_diff <- sales$Ship.Date - sales$Order.Date
 
-mean_shipdays <- time_length(mean(ship_order_diff),"days")
+mean_ship_days <- time_length(mean(ship_order_diff),"days")
 
-print(mean_shipdays)
+print(mean_ship_days)
 ```
 
 
@@ -82,7 +84,7 @@ You will need to split the customer name into first and last name segments and t
 ```{r}
 #It was hard for me to incorporate the length() function into this
 #This isn't the way I would normally write the code, but to answer the question
-#I wrote it this way
+#I wrote it this way.
 
 #Split customer name into two columns
 split_custname <- str_split_fixed(sales$Customer.Name," ",n=2)
@@ -138,8 +140,8 @@ Find the average profit by order year.
 **Note: You will need to use the aggregate() function to do this. To understand how the function works type ?aggregate in the console.**
 
 ```{r}
-orderyear <- format.Date(sales$Order.Date, "%Y")
+order_year <- format.Date(sales$Order.Date, "%Y")
 
-aggregate(sales$Profit, list(orderyear), FUN = mean)
+aggregate(sales$Profit, list(order_year), FUN = mean)
 ```
 
