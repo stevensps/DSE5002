@@ -49,10 +49,17 @@ How many weeks?
 ```{r}
 sales$Order.Date <- as.Date(sales$Order.Date,format="%M/%d/%Y")
 sales$Ship.Date <- as.Date(sales$Ship.Date,format="%B %d %Y")
+#Show order date is now a date vector
+is.Date(sales$Order.Date)
 
+#Show ship date is now a date vector
+is.Date(sales$Ship.Date)
+
+#Store max and min dates
 max_order_date <- max(sales$Order.Date)
 min_order_date <- min(sales$Order.Date)
 
+#Calculate time between orders using difftime function wrapped in time_length
 years_between_orders <- time_length(difftime(max_order_date, min_order_date), "years")
 
 days_between_orders <- time_length(difftime(max_order_date, min_order_date), "days")
@@ -69,8 +76,10 @@ print(weeks_between_orders)
 What is the average number of days it takes to ship an order?
 
 ```{r}
+#Number of days to ship = ship date - order date
 ship_order_diff <- sales$Ship.Date - sales$Order.Date
 
+#Again, wrap mean function in time_length function to get number of days
 mean_ship_days <- time_length(mean(ship_order_diff),"days")
 
 print(mean_ship_days)
@@ -82,17 +91,13 @@ How many customers have the first name Bill?
 You will need to split the customer name into first and last name segments and then use a regular expression to match the first name bill. Use the length() function to determine the number of customers with the first name Bill in the sales data. 
 
 ```{r}
-#It was hard for me to incorporate the length() function into this
-#This isn't the way I would normally write the code, but to answer the question
-#I wrote it this way.
-
 #Split customer name into two columns
 split_custname <- str_split_fixed(sales$Customer.Name," ",n=2)
 
 #pull out the length of customer first names
 firstname_length <- str_length(split_custname[,1])
 
-#If the first name is equal to 4, then count the total number matched to the 
+#If the first name length is equal to 4, then count the total number matched to the 
 #Pattern Bill. Wrap this entire piece of code in a sum function.
 sum(ifelse(firstname_length == 4, str_count(split_custname[,1],"Bill"),0))
 ```
@@ -102,6 +107,7 @@ How many mentions of the word 'table' are there in the Product.Name column?
 **Note you can do this in one line of code**
 
 ```{r}
+#Use str_count to count the number of times the whole word table is included
 sum(str_count(sales$Product.Name,"table"))
 ```
 
@@ -109,10 +115,13 @@ sum(str_count(sales$Product.Name,"table"))
 Create a table of counts for each state in the sales data. The counts table should be ordered alphabetically from A to Z. 
 
 ```{r}
+#Assign state to factor
 sales$State <- factor(sales$State)
+#Check for factor
 is.factor(sales$State)
+#Show levels
 levels(sales$State)
-
+#Build table
 table(sales$State)
 
 ```
@@ -121,8 +130,11 @@ table(sales$State)
 Create an alphabetically ordered barplot for each sales Category in the State of Texas. 
 
 ```{r}
+#Used subset to filter dataset
 sales_texas <- subset(sales, State=="Texas")
 
+#Used table wrapped in barplot. Since State is already a factor
+#from above, alphabetical ordering was applied
 barplot(table(sales_texas$Category))
 
 ```
