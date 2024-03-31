@@ -1,7 +1,7 @@
 ---
 title: "Week 3 Exercises"
-author: "Your Name Here"
-date: "May 19, 2022"
+author: "Steven Simonsen"
+date: "March 25, 2024"
 output: pdf_document
 ---
 
@@ -44,17 +44,39 @@ Only one valid answer exists.
 *Use the function seq_along to iterate*
 
 ```{r}
-two_sum <- function(nums_vector,target){
-  #your code here
-  
-}
+library(purrr)
 
-
-# Test code
 nums_vector <- c(5,7,12,34,6,10,8,9)
 target <- 13
- 
-two_sum(nums_vector,target)
+
+#Assign initial loop_work variable to 0 for comparison to hashloop later
+loop_work <- 0
+
+two_sum <- function(nums_vector,target){
+  #Empty character vector assigned to variable loop vector for now
+  loop_vector <- character()
+  #nested for statements using 
+  #seq_along to iterate over the num_vector.
+    for(i in seq_along(nums_vector)) {
+      loop_work <<- loop_work + 1
+      for(j in seq_along(nums_vector)) {
+      #if the sum of position [i] and position [j] equal the target 
+      #and aren't the same number,
+      #concatenate and output the indices on a line
+        loop_work <<- loop_work + 1
+        if(i < j && nums_vector[i] + nums_vector[j] == target) {
+          loop_vector <- c(loop_vector, paste(i, j))
+      }
+    }
+    }
+  #Return used outside of the for loop, but within function!
+  return(loop_vector)
+}
+#run the function by assigning result to the function
+result <- two_sum(nums_vector, target)
+#print the result
+print(result)
+# Test code
 #expected answers
 #[1] 1 7
 #[1] 2 5
@@ -70,17 +92,59 @@ Loop the array once to make a hash map of the value to its index. Then loop agai
 *A simple implementation uses two iterations. In the first iteration, we add each element's value as a key and its index as a value to the hash table. Then, in the second iteration, we check if each element's complement (target – nums_vector[i]) exists in the hash table. If it does exist, we return current element's index and its complement's index. Beware that the complement must not be nums_vector[i] itself!*
 
 ```{r}
-two_sum <- function(nums_vector,target){
-  #your code here
-  
+library(hash)
+nums_vector2 <- c(5,7,12,34,6,10,8,9)
+target2 <- 15
+
+#Assign hash_work variable to 0
+hash_work <- 0
+
+
+two_sum2 <- function(nums_vector2,target2){
+  #Assign h to an empty hash map
+  h<-hash()
+  #As noted above, assign each element's value as a key and its index as a value to   the hash table.
+  for(i in seq_along(nums_vector2)) {
+    #Add 1 to hash_work for comparison to loop work at end. Use <<- global
+    #assignment operator to update the variable outside of the function
+    hash_work <<- hash_work + 1
+    h[(nums_vector2[i])] <- i
+
+  }
+  #Empty character vector for iteration #2
+  result2 <- character()
+  for(i in seq_along(nums_vector2)) {
+    #Add again to hash_work
+    hash_work <<- hash_work + 1
+    #As noted above, complement is equal to target less the nums_vector[i]
+    complement <- target2 - nums_vector2[i]
+    #The first part of the if statement checks to make sure the complement is 
+    #less than nums_vector2[i] to avoid duplication. 
+    #The second part of the if statement checks to see if the complement is
+    #contained within the keys (names) of nums_vector2[i]
+    if(complement < nums_vector2[i] && complement %in% names(h)) {
+      #If found, append to result2 vector with the value (indices) of the
+      #complement, and the index of the original nums_vector2 that corresponds 
+      #with the value whos sum is equal to the target, 15.
+      #as.character is needed because R converts keys to a character type.
+      #Since our values are numeric, I converted to character to ensure keys are
+      #treated as characters. Before adding this, I was getting very 
+      #strange,unexpected errors.
+      result2 <- c(result2, paste(h[[as.character(complement)]], i))
+    }
+  }
+  #I made sure to use return OUTSIDE of the for loops, but still within function!
+  return(result2)
 }
 
+#Assign result two to running the function
+result2 <- two_sum2(nums_vector2, target2)
+#Print the result2
+print(result2)
+#comparison of hashwork vs loopwork. Much more efficient to use hash!
+print(hash_work)
+print(loop_work)
 
-# Test code
-nums_vector <- c(5,7,12,34,6,10,8,9)
-target <- 15
- 
-two_sum(nums_vector,target)
 #expected answers
 #[1] 10  5
 #[1] 8 7
