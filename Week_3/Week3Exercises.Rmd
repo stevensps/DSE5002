@@ -42,6 +42,7 @@ Only one valid answer exists.
 *The brute force approach is simple. Loop through each element x and find if there is another value that equals to target – x*
 
 *Use the function seq_along to iterate*
+In the function below, I debated whether to use "<" or "!=" in my if statment. I ultimately went with "<" because the problem stated "you may not use the same element twice."
 
 ```{r}
 library(purrr)
@@ -60,8 +61,9 @@ two_sum <- function(nums_vector,target){
     for(i in seq_along(nums_vector)) {
       loop_work <<- loop_work + 1
       for(j in seq_along(nums_vector)) {
-      #if the sum of position [i] and position [j] equal the target 
-      #and aren't the same number,
+      #if the sum of element [i] and element [j] equal the target 
+      #and aren't the same number (could also use != to return
+      #the reverse of the result),
       #concatenate and output the indices on a line
         loop_work <<- loop_work + 1
         if(i < j && nums_vector[i] + nums_vector[j] == target) {
@@ -90,6 +92,8 @@ Loop the array once to make a hash map of the value to its index. Then loop agai
 *The keys of your hash table should be each of the numbers in the nums_vector minus the target. *
 
 *A simple implementation uses two iterations. In the first iteration, we add each element's value as a key and its index as a value to the hash table. Then, in the second iteration, we check if each element's complement (target – nums_vector[i]) exists in the hash table. If it does exist, we return current element's index and its complement's index. Beware that the complement must not be nums_vector[i] itself!*
+
+In this function, I again used "<" instead of "!=" in the if statement for the same reason as above. Additionally, I returned the indices after reading "If it does exist, we return current element's index and its complement's index." Therefore, my answers don't match the expected answers - hopefully that's okay!
 
 ```{r}
 library(hash)
@@ -125,7 +129,7 @@ two_sum2 <- function(nums_vector2,target2){
     if(complement < nums_vector2[i] && complement %in% names(h)) {
       #If found, append to result2 vector with the value (indices) of the
       #complement, and the index of the original nums_vector2 that corresponds 
-      #with the value whos sum is equal to the target, 15.
+      #with the value whos sum is equal to the target.
       #as.character is needed because R converts keys to a character type.
       #Since our values are numeric, I converted to character to ensure keys are
       #treated as characters. Before adding this, I was getting very 
@@ -137,7 +141,7 @@ two_sum2 <- function(nums_vector2,target2){
   return(result2)
 }
 
-#Assign result two to running the function
+#Assign result2 to running the function
 result2 <- two_sum2(nums_vector2, target2)
 #Print the result2
 print(result2)

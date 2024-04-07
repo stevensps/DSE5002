@@ -1,0 +1,340 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Week 3 Exercises},
+  pdfauthor={Steven Simonsen},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Week 3 Exercises}
+\author{Steven Simonsen}
+\date{March 25, 2024}
+
+\begin{document}
+\maketitle
+
+Please complete all exercises below. You may use any library that we
+have covered in class UP TO THIS POINT.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  Two Sum - Write a function named two\_sum()
+\end{enumerate}
+
+Given a vector of integers nums and an integer target, return indices of
+the two numbers such that they add up to target.
+
+You may assume that each input would have exactly one solution, and you
+may not use the same element twice.
+
+You can return the answer in any order.
+
+Example 1:
+
+Input: nums = {[}2,7,11,15{]}, target = 9 Output: {[}0,1{]} Explanation:
+Because nums{[}0{]} + nums{[}1{]} == 9, we return {[}0, 1{]}. Example 2:
+
+Input: nums = {[}3,2,4{]}, target = 6 Output: {[}1,2{]} Example 3:
+
+Input: nums = {[}3,3{]}, target = 6 Output: {[}0,1{]}
+
+Constraints:
+
+2 \textless= nums.length \textless= 104 --109 \textless= nums{[}i{]}
+\textless= 109 --109 \textless= target \textless= 109 Only one valid
+answer exists.
+
+\emph{Note: For the first problem I want you to use a brute force
+approach (loop inside a loop)}
+
+\emph{The brute force approach is simple. Loop through each element x
+and find if there is another value that equals to target -- x}
+
+\emph{Use the function seq\_along to iterate} In the function below, I
+debated whether to use ``\textless{}'' or ``!='' in my if statment. I
+ultimately went with ``\textless{}'' because the problem stated ``you
+may not use the same element twice.''
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(purrr)}
+
+\NormalTok{nums\_vector }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{34}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{)}
+\NormalTok{target }\OtherTok{\textless{}{-}} \DecValTok{13}
+
+\CommentTok{\#Assign initial loop\_work variable to 0 for comparison to hashloop later}
+\NormalTok{loop\_work }\OtherTok{\textless{}{-}} \DecValTok{0}
+
+\NormalTok{two\_sum }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(nums\_vector,target)\{}
+  \CommentTok{\#Empty character vector assigned to variable loop vector for now}
+\NormalTok{  loop\_vector }\OtherTok{\textless{}{-}} \FunctionTok{character}\NormalTok{()}
+  \CommentTok{\#nested for statements using }
+  \CommentTok{\#seq\_along to iterate over the num\_vector.}
+    \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(nums\_vector)) \{}
+\NormalTok{      loop\_work }\OtherTok{\textless{}\textless{}{-}}\NormalTok{ loop\_work }\SpecialCharTok{+} \DecValTok{1}
+      \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(nums\_vector)) \{}
+      \CommentTok{\#if the sum of element [i] and element [j] equal the target }
+      \CommentTok{\#and aren\textquotesingle{}t the same number (could also use != to return}
+      \CommentTok{\#the reverse of the result),}
+      \CommentTok{\#concatenate and output the indices on a line}
+\NormalTok{        loop\_work }\OtherTok{\textless{}\textless{}{-}}\NormalTok{ loop\_work }\SpecialCharTok{+} \DecValTok{1}
+        \ControlFlowTok{if}\NormalTok{(i }\SpecialCharTok{\textless{}}\NormalTok{ j }\SpecialCharTok{\&\&}\NormalTok{ nums\_vector[i] }\SpecialCharTok{+}\NormalTok{ nums\_vector[j] }\SpecialCharTok{==}\NormalTok{ target) \{}
+\NormalTok{          loop\_vector }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(loop\_vector, }\FunctionTok{paste}\NormalTok{(i, j))}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{    \}}
+  \CommentTok{\#Return used outside of the for loop, but within function!}
+  \FunctionTok{return}\NormalTok{(loop\_vector)}
+\NormalTok{\}}
+\CommentTok{\#run the function by assigning result to the function}
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{two\_sum}\NormalTok{(nums\_vector, target)}
+\CommentTok{\#print the result}
+\FunctionTok{print}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "1 7" "2 5"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Test code}
+\CommentTok{\#expected answers}
+\CommentTok{\#[1] 1 7}
+\CommentTok{\#[1] 2 5}
+\CommentTok{\#[1] 5 2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Now write the same function using hash tables. Loop the array once to
+  make a hash map of the value to its index. Then loop again to find if
+  the value of target-current value is in the map.
+\end{enumerate}
+
+\emph{The keys of your hash table should be each of the numbers in the
+nums\_vector minus the target. }
+
+\emph{A simple implementation uses two iterations. In the first
+iteration, we add each element's value as a key and its index as a value
+to the hash table. Then, in the second iteration, we check if each
+element's complement (target -- nums\_vector{[}i{]}) exists in the hash
+table. If it does exist, we return current element's index and its
+complement's index. Beware that the complement must not be
+nums\_vector{[}i{]} itself!}
+
+In this function, I again used ``\textless{}'' instead of ``!='' in the
+if statement for the same reason as above. Additionally, I returned the
+indices after reading ``If it does exist, we return current element's
+index and its complement's index.'' Therefore, my answers don't match
+the expected answers - hopefully that's okay!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(hash)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## hash-2.2.6.3 provided by Decision Patterns
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nums\_vector2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{34}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{)}
+\NormalTok{target2 }\OtherTok{\textless{}{-}} \DecValTok{15}
+
+\CommentTok{\#Assign hash\_work variable to 0}
+\NormalTok{hash\_work }\OtherTok{\textless{}{-}} \DecValTok{0}
+
+
+\NormalTok{two\_sum2 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(nums\_vector2,target2)\{}
+  \CommentTok{\#Assign h to an empty hash map}
+\NormalTok{  h}\OtherTok{\textless{}{-}}\FunctionTok{hash}\NormalTok{()}
+  \CommentTok{\#As noted above, assign each element\textquotesingle{}s value as a key and its index as a value to   the hash table.}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(nums\_vector2)) \{}
+    \CommentTok{\#Add 1 to hash\_work for comparison to loop work at end. Use \textless{}\textless{}{-} global}
+    \CommentTok{\#assignment operator to update the variable outside of the function}
+\NormalTok{    hash\_work }\OtherTok{\textless{}\textless{}{-}}\NormalTok{ hash\_work }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{    h[(nums\_vector2[i])] }\OtherTok{\textless{}{-}}\NormalTok{ i}
+
+\NormalTok{  \}}
+  \CommentTok{\#Empty character vector for iteration \#2}
+\NormalTok{  result2 }\OtherTok{\textless{}{-}} \FunctionTok{character}\NormalTok{()}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(nums\_vector2)) \{}
+    \CommentTok{\#Add again to hash\_work}
+\NormalTok{    hash\_work }\OtherTok{\textless{}\textless{}{-}}\NormalTok{ hash\_work }\SpecialCharTok{+} \DecValTok{1}
+    \CommentTok{\#As noted above, complement is equal to target less the nums\_vector[i]}
+\NormalTok{    complement }\OtherTok{\textless{}{-}}\NormalTok{ target2 }\SpecialCharTok{{-}}\NormalTok{ nums\_vector2[i]}
+    \CommentTok{\#The first part of the if statement checks to make sure the complement is }
+    \CommentTok{\#less than nums\_vector2[i] to avoid duplication. }
+    \CommentTok{\#The second part of the if statement checks to see if the complement is}
+    \CommentTok{\#contained within the keys (names) of nums\_vector2[i]}
+    \ControlFlowTok{if}\NormalTok{(complement }\SpecialCharTok{\textless{}}\NormalTok{ nums\_vector2[i] }\SpecialCharTok{\&\&}\NormalTok{ complement }\SpecialCharTok{\%in\%} \FunctionTok{names}\NormalTok{(h)) \{}
+      \CommentTok{\#If found, append to result2 vector with the value (indices) of the}
+      \CommentTok{\#complement, and the index of the original nums\_vector2 that corresponds }
+      \CommentTok{\#with the value whos sum is equal to the target.}
+      \CommentTok{\#as.character is needed because R converts keys to a character type.}
+      \CommentTok{\#Since our values are numeric, I converted to character to ensure keys are}
+      \CommentTok{\#treated as characters. Before adding this, I was getting very }
+      \CommentTok{\#strange,unexpected errors.}
+\NormalTok{      result2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(result2, }\FunctionTok{paste}\NormalTok{(h[[}\FunctionTok{as.character}\NormalTok{(complement)]], i))}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \CommentTok{\#I made sure to use return OUTSIDE of the for loops, but still within function!}
+  \FunctionTok{return}\NormalTok{(result2)}
+\NormalTok{\}}
+
+\CommentTok{\#Assign result2 to running the function}
+\NormalTok{result2 }\OtherTok{\textless{}{-}} \FunctionTok{two\_sum2}\NormalTok{(nums\_vector2, target2)}
+\CommentTok{\#Print the result2}
+\FunctionTok{print}\NormalTok{(result2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "1 6" "2 7" "5 8"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#comparison of hashwork vs loopwork. Much more efficient to use hash!}
+\FunctionTok{print}\NormalTok{(hash\_work)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(loop\_work)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 72
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#expected answers}
+\CommentTok{\#[1] 10  5}
+\CommentTok{\#[1] 8 7}
+\CommentTok{\#[1] 9 6}
+\CommentTok{\#[1]  5 10}
+\CommentTok{\#[1] 7 8}
+\CommentTok{\#[1] 6 9}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
